@@ -1,3 +1,5 @@
+//This element redirects the user to the login page in case 'logged' is set to false
+
 import {Navigate} from 'react-router-dom';
 
 

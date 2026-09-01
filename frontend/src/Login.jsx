@@ -34,7 +34,7 @@ export default function Login(){
 
         if (response.status == 401){
 
-            alert(responseData.error);
+            console.log(responseData.error);
 
 
         }
