@@ -50,12 +50,6 @@ export default function Login(){
             navigate("/vendas");
 
         }
-        else{
-
-            alert("Falha no Login!");
-
-
-        }
     }
 
 

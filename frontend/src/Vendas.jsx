@@ -12,7 +12,8 @@ export default function Vendas(){
 
     const loginType = localStorage.getItem('type');
     const navigate = useNavigate();
-    const [adminControl,setAdminControl] = useState({ date: '2026-01',goal: 0});
+// There are two "goal" values, goalFlag serves strictly to update the UI whenever a new goal is set, and the UI goal is the value fetched from the API that should be displayed
+    const [adminControl,setAdminControl] = useState({ date: '2026-01',goalFlag : 0,uiGoal : "0"});
     const [sales,setSales] = useState(0);
     let API_URL = localStorage.getItem('API_URL');
     
@@ -25,11 +26,11 @@ export default function Vendas(){
         const fetchGoal = async () => {
         const goalResponse = await fetch(`${API_URL}/goals?date=${adminControl.date}`);
         const goalData = await goalResponse.json();
-        console.log(goalData.goal);
-        setAdminControl({...adminControl, goal : goalData.goal});
+        console.log("FETCHED GOAL");
+        setAdminControl(prevControl => ({...prevControl, uiGoal: goalData.goal}));
     }
     fetchGoal();
-    },[adminControl.goal])
+    },[adminControl.goalFlag,adminControl.date])
 
 
     
