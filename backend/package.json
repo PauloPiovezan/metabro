@@ -1,6 +1,6 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
+  "name": "MetaBRO Server",
+  "version": "1.0.3",
   "description": "",
   "main": "server.js",
   "bin" : "server.js",
