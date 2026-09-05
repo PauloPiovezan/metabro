@@ -32,8 +32,8 @@
       "signingHashAlgorithms": [
         "sha256"
       ],
-      "signtoolOptions": {
-        "timeStampServer": "http://timestamp.digicert.com"
+      "signAndEditCompilerOptions": {
+        "timeStampServer": "http://digicert.com"
       }
     },
     "nsis": {
