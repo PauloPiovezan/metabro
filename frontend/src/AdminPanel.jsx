@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 
 
-export default function AdminPanel({adminControl, setAdminControl}) {
+export default function AdminPanel({adminControl, setAdminControl, popup, setPopup}) {
     const goalRef = useRef(null);
     const API_URL = localStorage.getItem('API_URL');
 
@@ -17,14 +17,13 @@ export default function AdminPanel({adminControl, setAdminControl}) {
         })
 
         if (goalResponse.ok){
-            console.log("Nova Meta cadastrada para o mês: " + adminControl.date);
+            setPopup({show: true, title: "Meta Cadastrada com sucesso" ,message: "Nova Meta cadastrada para o mês: " + adminControl.date});
             setAdminControl(prevControl => ({...prevControl, goalFlag : prevControl.goalFlag + 1}))
         }
         else{
 
             console.log("Erro ao definir meta!");
         }
-        console.log("SET NEW GOAL");
     }
     
     

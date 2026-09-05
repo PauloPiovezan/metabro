@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
+import Popup from "./Popup";
 export default function Login(){
     const [API,setAPI] = useState(localStorage.getItem('API_URL'));
     localStorage.setItem('API_URL',API);
@@ -8,9 +9,9 @@ export default function Login(){
     const [user,setUser] = useState('');
     const [password,setPassword] = useState('');
     const [config,setConfig] = useState(false);
+    const [popup, setPopup] = useState({show : false, title : "" , message: ""});
 
     useEffect(()=>{
-        
         if(localStorage.getItem('logged') === 'true'){
 
             navigate("/vendas")
@@ -22,6 +23,7 @@ export default function Login(){
 
     async function handleLogin(){
 
+        
 
         const response = await fetch(`${API_URL}/login`,
             {method: "POST",
@@ -34,7 +36,8 @@ export default function Login(){
 
         if (response.status == 401){
 
-            console.log(responseData.error);
+            setPopup({show: true, title: "Erro no Login", message: responseData.error });
+    
 
 
         }
@@ -52,17 +55,27 @@ export default function Login(){
         }
     }
 
+    function loginKeyDown(event){
+
+        if (event.key == "Enter"){
+
+            handleLogin()
+
+        }
+
+    }
 
 
     return(
 
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-green-200 gap-15">
+        {popup.show ? <Popup title={popup.title} message={popup.message} onClick={()=>{setPopup({...popup, show: false})}}/> : null}
         <div className=" flex flex-col w-60 outline-2 outline-black p-5 gap-1 bg-white items-center">
             <h6>Usuário</h6>
-            <input onChange={(e)=>setUser(e.target.value)} className="bg-white outline-black outline-2"></input>
+            <input onKeyDown = {loginKeyDown} onChange={(e)=>setUser(e.target.value)} className="bg-white outline-black outline-2"></input>
             <h6>Senha</h6>
-            <input type="password" onChange={(e)=>setPassword(e.target.value)} className="bg-white outline-black outline-2"></input>
-            <button className="w-30 bg-green-500 mt-5 active:bg-green-800 rounded-2xl p-2" onClick={handleLogin}> Entrar </button>
+            <input type="password" onKeyDown = {loginKeyDown} onChange={(e)=>setPassword(e.target.value)} className="bg-white outline-black outline-2"></input>
+            <button className="w-30 bg-green-500 mt-5 active:bg-green-800 rounded-2xl p-2" onClick={handleLogin} onKeyDown={loginKeyDown}> Entrar </button>
             <button className="w-30 bg-green-500 rounded-2xl active:bg-green-800 p-2 mt-4" onClick={() => {setConfig(!config)}}>IP</button>
         </div>
 
@@ -73,6 +86,8 @@ export default function Login(){
         
         
                 </div> : null}
+
+        
         
 
     </div>
