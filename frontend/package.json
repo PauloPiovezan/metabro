@@ -27,11 +27,14 @@
         "portable",
         "nsis"
       ],
-      "signingHashAlgorithms": [
-        "sha256"
-    ],
-    "rfc3161TimeStampServer": "http://timestamp.digicert.com",
-        "icon": "public/icon.ico"
+      "icon": "public/icon.ico",
+      "sign": {
+        "type": "signtool",
+        "signingHashAlgorithms": [
+          "sha256"
+        ],
+        "rfc3161TimeStampServer": "http://digicert.com"
+      }
     },
     "nsis": {
       "oneClick": false,
