@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "electron/main.js",
   "scripts": {
@@ -27,7 +27,11 @@
         "portable",
         "nsis"
       ],
-      "icon": "public/icon.ico"
+      "signingHashAlgorithms": [
+        "sha256"
+    ],
+    "rfc3161TimeStampServer": "http://timestamp.digicert.com",
+        "icon": "public/icon.ico"
     },
     "nsis": {
       "oneClick": false,
