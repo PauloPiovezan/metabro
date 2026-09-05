@@ -28,13 +28,7 @@
         "portable",
         "nsis"
       ],
-      "icon": "public/icon.ico",
-      "signingHashAlgorithms": [
-        "sha256"
-      ],
-      "signAndEditCompilerOptions": {
-        "timeStampServer": "http://digicert.com"
-      }
+      "icon": "public/icon.ico"
     },
     "nsis": {
       "oneClick": false,
