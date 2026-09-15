@@ -23,6 +23,7 @@ const currentDate = `${year}-${month}`;
 // There are two "goal" values, goalFlag serves strictly to update the UI whenever a new goal is set, and the UI goal is the value fetched from the API that should be displayed
     const [adminControl,setAdminControl] = useState({ date: currentDate,goalFlag : 0,uiGoal : "0"});
     const [sales,setSales] = useState(0);
+    const [update, setUpdate] = useState(0);
     const [popup, setPopup] = useState({show : false, title : "" , message: ""});
     let API_URL = localStorage.getItem('API_URL');
     
@@ -39,7 +40,7 @@ const currentDate = `${year}-${month}`;
         setAdminControl(prevControl => ({...prevControl, uiGoal: goalData.goal}));
     }
     fetchGoal();
-    },[adminControl.goalFlag,adminControl.date])
+    },[adminControl.goalFlag, adminControl.date, update])
 
 
     
@@ -51,7 +52,7 @@ const currentDate = `${year}-${month}`;
             setSales(numericTotal);
         }
         fetchSales();
-    },[adminControl.date])
+    },[adminControl.date, update])
 
     
 
@@ -67,12 +68,14 @@ const currentDate = `${year}-${month}`;
         
         <SalesPanel sales = {sales} adminControl={adminControl}/>
         
-        {loginType == 'admin' ? <AdminPanel adminControl = {adminControl} setAdminControl = {setAdminControl} popup = {popup} setPopup = {setPopup}/>
-        : loginType == 'usr' ? <UserPanel adminControl = {adminControl} setAdminControl = {setAdminControl} />
+        {loginType == 'admin' ? <AdminPanel adminControl = {adminControl} setAdminControl = {setAdminControl} popup = {popup} setPopup = {setPopup} update = {()=>{setUpdate(update + 1)}} />
+        : loginType == 'usr' ? <UserPanel adminControl = {adminControl} setAdminControl = {setAdminControl} update = {()=>{setUpdate(update + 1)}} />
         : navigate('/login')}
 
         <footer>
+            
             <button className="w-30 bg-green-500 rounded-2xl active:bg-green-800 p-2 mt-4" onClick={handleExit}>Sair</button>
+            
         </footer>
     </div>
     )

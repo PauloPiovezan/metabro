@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 
 
-export default function AdminPanel({adminControl, setAdminControl, popup, setPopup}) {
+export default function AdminPanel({adminControl, setAdminControl, popup, setPopup,update}) {
     const goalRef = useRef(null);
     const API_URL = localStorage.getItem('API_URL');
 
@@ -33,7 +33,9 @@ export default function AdminPanel({adminControl, setAdminControl, popup, setPop
             <input className="outline-black outline-1 rounded-2xl h-8 p-2" id = "dateSelect" type="month" value={adminControl.date} onChange={ (e) => {setAdminControl({ ...adminControl, date: e.target.value})}}></input>
             <label htmlFor = "metaInput" className="text-gray-400">Meta</label>
             <input ref = {goalRef} className="outline-black outline-1 rounded-2xl h-8 p-2" id = "metaInput"></input>
-            <button className="bg-green-500 rounded-2xl active:bg-green-800 p-2 mt-4" onClick={setGoal}> Definir Meta</button>
+            <button className="bg-green-500 rounded-2xl active:bg-green-800 p-2 mt-4" onClick={setGoal}>Definir Meta</button>
+            <button className="bg-green-500 rounded-2xl active:bg-green-800 p-2 mt-4" onClick={update}>Atualizar</button>
+            
         </div>)
 
 }
